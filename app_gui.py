@@ -1,0 +1,293 @@
+# app_gui.py
+
+import sys
+import os
+import logging
+
+from PySide6.QtWidgets import (
+    QApplication, QMainWindow, QWidget, QLabel, QLineEdit,
+    QPushButton, QVBoxLayout, QHBoxLayout, QFileDialog,
+    QListWidget, QTextEdit, QMessageBox, QProgressBar
+)
+
+from PySide6.QtGui import QAction
+from PySide6.QtCore import Qt
+from config import load_config, save_config
+from functions.scanner import find_mbox_files, parse_all_mailboxes
+from functions.backup_mail_folder import backup_folder
+from functions.process_1_mbox import process_one_mbox # TODO Not used here but may be needed elsewhere
+from functions.process_mboxes import process_mboxes
+from functions.logging_setup import setup_logging
+from datetime import datetime
+
+setup_logging()
+logging.info("-" * 60)
+logging.info("Started")
+LOG_FILE = os.path.join("logs", "thunderbird_deduper.log")
+
+# Global “catch-all”
+def log_uncaught_exceptions(exctype, value, tb):
+    logging.critical(
+        "Uncaught exception",
+        exc_info=(exctype, value, tb)
+    )
+
+sys.excepthook = log_uncaught_exceptions
+
+class MainWindow(QMainWindow):
+    """
+    MainWindow class for Thunderbird Duplicate Email Remover GUI application.
+    This class creates and manages the main window of the application, providing a user interface
+    for scanning Thunderbird mailbox directories and removing duplicate emails.
+    Attributes:
+        progress_bar (QProgressBar): Progress bar widget showing scan completion percentage.
+        progress_label (QLabel): Label displaying current operation status.
+        folder_input (QLineEdit): Text input field for Thunderbird folder path.
+        scan_button (QPushButton): Button to initiate the scan and deduplication process.
+        mbox_list (QListWidget): List widget displaying found mailbox files.
+        output_box (QTextEdit): Read-only text area for operation results and messages.
+        config (dict): Configuration dictionary loaded from config file.
+        version (str): Application version from config.
+    Methods:
+        browse_folder(): Opens a file dialog to select Thunderbird Local Folders directory.
+        show_about_dialog(): Displays application information dialog.
+        open_log_file(): Opens the application log file in the system's default text editor.
+        start_scan(): Initiates the mailbox scan, backup creation, and duplicate email removal process.
+    """
+    def __init__(self):
+        super().__init__()
+
+        self.setWindowTitle("Thunderbird Duplicate Email Remover")
+        self.setMinimumSize(500, 400)
+
+        self.progress_bar = QProgressBar()
+        self.progress_label = QLabel("")
+        self.progress_label.setFixedWidth(170)
+        self.progress_label.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+
+        progress_layout = QHBoxLayout()
+        progress_layout.addWidget(self.progress_label)
+        progress_layout.addWidget(self.progress_bar)
+
+        self.progress_bar.setMinimum(0)
+        self.progress_bar.setMaximum(100)  # Will be set dynamically later
+        self.progress_bar.setValue(0)
+
+        # Load config
+        self.config = load_config()
+        initial_folder = self.config.get("thunderbird_folder", "")
+        self.version = self.config.get("version", "")
+
+        # -------------------------------------------------
+        # MENU BAR
+        # -------------------------------------------------
+        menubar = self.menuBar()
+
+        # FILE MENU
+        file_menu = menubar.addMenu("File")
+
+        exit_action = QAction("Exit", self)
+        exit_action.triggered.connect(self.close)
+        file_menu.addAction(exit_action)
+
+        # HELP MENU
+        help_menu = menubar.addMenu("Help")
+
+        about_action = QAction("About", self)
+        about_action.triggered.connect(self.show_about_dialog)
+        help_menu.addAction(about_action)
+        view_log_action = help_menu.addAction("View Log")
+        view_log_action.triggered.connect(self.open_log_file)
+
+
+
+        # -------------------------------------------------
+        # WIDGETS
+        # -------------------------------------------------
+
+        folder_label = QLabel("Select Thunderbird Local Folders directory:")
+
+        self.folder_input = QLineEdit(initial_folder)
+        self.browse_button = QPushButton("Browse")
+        self.browse_button.clicked.connect(self.browse_folder)
+
+        folder_layout = QHBoxLayout()
+        folder_layout.addWidget(self.folder_input)
+        folder_layout.addWidget(self.browse_button)
+
+        self.scan_button = QPushButton("Start")
+        self.scan_button.setFixedWidth(125)
+        self.scan_button.clicked.connect(self.start_scan)
+
+        mbox_label = QLabel("Mailbox files found:")
+        self.mbox_list = QListWidget()
+
+        status_label = QLabel("Status:")
+        self.output_box = QTextEdit()
+        self.output_box.setReadOnly(True)
+
+        exit_button = QPushButton("Exit")
+        exit_button.setFixedWidth(100)
+        exit_button.clicked.connect(self.close)
+
+        layout = QVBoxLayout()
+        layout.addWidget(folder_label)
+        layout.addLayout(folder_layout)
+        layout.addWidget(self.scan_button)
+        layout.addLayout(progress_layout)
+        layout.addWidget(mbox_label)
+        layout.addWidget(self.mbox_list)
+        layout.addWidget(status_label)
+        layout.addWidget(self.output_box)
+        layout.addWidget(exit_button)
+
+        container = QWidget()
+        container.setLayout(layout)
+        self.setCentralWidget(container)
+
+
+
+    # -------------------------------------------------
+    # File → Browse…
+    # -------------------------------------------------
+    def browse_folder(self):
+        folder = QFileDialog.getExistingDirectory(
+            self,
+            "Select Thunderbird Folder",
+            self.folder_input.text() or os.path.expanduser("~")
+        )
+
+        if folder:
+            self.folder_input.setText(folder)
+
+
+
+    # -------------------------------------------------
+    # Help → About
+    # -------------------------------------------------
+    def show_about_dialog(self):
+        QMessageBox.about(
+            self,
+            "About Thunderbird Duplicate Email Remover",
+            (
+                "Thunderbird Duplicate Email Remover\n\n"
+                "A tool to locate mailbox files and assist in removing email duplicates.\n\n"
+                f"Version {self.version}"
+            )
+        )
+    
+
+
+    # -------------------------------------------------
+    # Help → View Log
+    # -------------------------------------------------
+    def open_log_file(self):
+        if os.path.exists(LOG_FILE):
+            os.startfile(LOG_FILE)
+        else:
+            QMessageBox.warning(
+                self,
+                "Log file not found",
+                "The log file does not exist yet."
+            )
+
+
+
+    # -------------------------------------------------
+    # Scan Button Logic
+    # -------------------------------------------------
+    def start_scan(self):
+        start_time = datetime.now()
+
+        # Disable button & change text
+        self.browse_button.setEnabled(False)
+        self.scan_button.setEnabled(False)
+        original_text = self.scan_button.text()
+        self.scan_button.setText("Processing...")
+        QApplication.processEvents()   # Force GUI refresh
+
+        self.progress_label.setText("Backing up mailboxes...")
+
+        try:
+            folder = self.folder_input.text().strip()
+
+            if folder:
+                self.config["thunderbird_folder"] = folder
+                save_config(self.config)
+
+            if not folder or not os.path.isdir(folder):
+                self.output_box.setPlainText("❌ Please select a valid folder.\n")
+                return
+            
+            self.output_box.setPlainText(f"✔ Folder selected:\n{folder}\n")
+            self.progress_bar.setValue(1)
+            logging.info(f"Folder selected: {folder}")
+            QApplication.processEvents()   # Force GUI refresh
+            backup_file = backup_folder(folder)
+            self.output_box.append(f"✔ Backup created:\n {backup_file}\n")
+            logging.info(f"Backup created: {backup_file}")
+            self.progress_bar.setValue(29)
+
+            # self.scan_button.setText("Scanning for duplicate mails...")
+            self.progress_label.setText("Scanning for duplicate mails...") 
+            QApplication.processEvents()   # Force GUI refresh
+
+            mboxes = find_mbox_files(folder)
+
+            self.mbox_list.clear()
+            self.mbox_list.addItems(mboxes)
+
+            # all_messages = parse_all_mailboxes(folder) # ////////////////////////// ???
+
+            mboxes, msg_for_output_box, total_messages_deleted = process_mboxes(mboxes, self.progress_bar) 
+            
+            if total_messages_deleted == 0:
+                msg_for_output_box += f"\n❌ No duplicates were found\n"
+            else:   
+                msg_for_output_box += f"\n✔ Total duplicate messages deleted across all mailboxes: {total_messages_deleted}"
+            
+            self.progress_bar.setValue(self.progress_bar.maximum())
+            self.progress_label.setText("Finished")
+
+            # Show summary message box
+            QMessageBox.information(
+                self,
+                "Scan complete",
+                f"\nTotal duplicate messages deleted across all mailboxes: {total_messages_deleted}"
+            )
+
+            self.output_box.append(msg_for_output_box)
+            
+            end_time = datetime.now()
+            duration = end_time - start_time
+            duration_minutes = duration.seconds / 60
+            duration_seconds = duration.seconds % 60
+            duration_millis = duration.microseconds // 1000
+            
+            if duration_minutes < 1:
+                duration_mins_secs = f"{duration_seconds}.{duration_millis} seconds"
+            elif duration_minutes == 1:
+                duration_mins_secs = f"1 minute and {duration_seconds}.{duration_millis} seconds"
+            else:
+                duration_mins_secs = f"{int(duration_minutes)} minutes and {duration_seconds}.{duration_millis} seconds"
+
+            logging.info(f"Finished. Execution duration: {duration_mins_secs}")
+
+        finally:
+            # Re-enable scan button & restore text
+            self.browse_button.setEnabled(True)
+            self.scan_button.setEnabled(True)
+            self.scan_button.setText(original_text)
+
+
+
+# -------------------------------------------------
+# MAIN
+# -------------------------------------------------
+if __name__ == "__main__":
+    app = QApplication(sys.argv)
+
+    window = MainWindow()
+    window.show()
+
+    sys.exit(app.exec())

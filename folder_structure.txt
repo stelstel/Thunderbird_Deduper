@@ -1,0 +1,98 @@
+thunderbird_deduper/
+│
+├── app_gui.py              # PySimpleGUI interface (main entry point)
+├── scanner.py              # Finds MBOX files in selected folder
+├── deduper.py              # Detects and removes duplicate emails
+├── mbox_utils.py           # Helper functions for reading MBOX safely
+│
+├── config/
+│   └── config.json       # Optional user settings (e.g., backup options)
+│
+├── logs/
+│   └── deduper.log         # Activity log (created automatically)
+│
+├── backups/
+│   └── (empty now)         # MBOX backups go here before modifying anything
+│
+├── build/                  # Empty at first; PyInstaller can output here
+├── models/
+    ├── __init__.py
+    └── mailbox.py
+
+🔍 What each file does
+1. app_gui.py (main file)
+Contains all PySimpleGUI layout code
+
+Folder picker
+
+Buttons for Scan / Delete duplicates / Backup
+
+Calls functions from scanner.py and deduper.py
+
+This is the file you will turn into an EXE later
+
+2. scanner.py
+Searches the chosen directory
+
+Detects Thunderbird’s MBOX files
+
+Handles odd Thunderbird formats (files without extensions)
+
+Sends the list of MBOX files back to the GUI
+
+3. deduper.py
+Reads MBOX messages
+
+Hashes message content to detect duplicates
+
+Outputs:
+
+duplicates found
+
+what message they match
+
+Handles deletion (only after user confirms)
+
+4. mbox_utils.py
+Low-level helper module for:
+
+safely reading mbox files
+
+avoiding file corruption
+
+creating temporary cleaned files
+
+preserving flags (read/unread, starred, etc.)
+
+5. config/settings.json
+Optional, but useful later for:
+
+json
+Kopiera kod
+{
+  "enable_backups": true,
+  "hash_method": "md5",
+  "ignore_trash_folder": true
+}
+6. logs/deduper.log
+All actions written here
+
+Good for debugging
+
+Useful if something goes wrong
+
+7. backups/
+Before modifying an mbox file, the program will save a copy here.
+
+Example:
+
+Kopiera kod
+Inbox_2025-01-01_12-45-34_backup.mbox
+8. build/
+When you're ready to package:
+
+css
+Kopiera kod
+pyinstaller --onefile --windowed app_gui.py
+You can configure PyInstaller to output into this folder.
+

@@ -1,0 +1,290 @@
+2026-01-01 14:42:42,670 | INFO | ------------------------------------------------------------
+2026-01-01 14:42:42,671 | INFO | Scan started
+2026-01-01 14:49:49,667 | INFO | ------------------------------------------------------------
+2026-01-01 14:49:49,667 | INFO | Scan started
+2026-01-01 14:51:59,536 | INFO | ------------------------------------------------------------
+2026-01-01 14:51:59,536 | INFO | Scan started
+2026-01-01 14:54:36,128 | INFO | ------------------------------------------------------------
+2026-01-01 14:54:36,129 | INFO | Scan started
+2026-01-01 14:56:15,461 | INFO | ------------------------------------------------------------
+2026-01-01 14:56:15,462 | INFO | Scan started
+2026-01-01 14:57:46,011 | INFO | ------------------------------------------------------------
+2026-01-01 14:57:46,011 | INFO | Scan started
+2026-01-01 14:59:42,468 | INFO | ------------------------------------------------------------
+2026-01-01 14:59:42,468 | INFO | Scan started
+2026-01-01 15:04:51,776 | INFO | ------------------------------------------------------------
+2026-01-01 15:04:51,777 | INFO | Scan started
+2026-01-01 15:06:17,560 | INFO | ------------------------------------------------------------
+2026-01-01 15:06:17,560 | INFO | Scan started
+2026-01-01 15:10:50,151 | INFO | ------------------------------------------------------------
+2026-01-01 15:10:50,151 | INFO | Scan started
+2026-01-01 15:11:54,590 | INFO | ------------------------------------------------------------
+2026-01-01 15:11:54,590 | INFO | Scan started
+2026-01-01 15:16:08,686 | INFO | ------------------------------------------------------------
+2026-01-01 15:16:08,686 | INFO | Started
+2026-01-01 15:16:33,476 | INFO | ('Backup and deletion of duplicates took:', '21 seconds')
+2026-01-01 15:17:56,375 | INFO | ------------------------------------------------------------
+2026-01-01 15:17:56,375 | INFO | Started
+2026-01-01 15:19:18,199 | INFO | ------------------------------------------------------------
+2026-01-01 15:19:18,200 | INFO | Started
+2026-01-01 15:19:42,774 | INFO | Backup and deletion of duplicates took: 21 seconds
+2026-01-01 15:26:34,479 | INFO | ------------------------------------------------------------
+2026-01-01 15:26:34,481 | INFO | Started
+2026-01-01 15:32:21,181 | INFO | ------------------------------------------------------------
+2026-01-01 15:32:21,183 | INFO | Started
+2026-01-01 15:33:29,898 | INFO | ------------------------------------------------------------
+2026-01-01 15:33:29,899 | INFO | Started
+2026-01-01 15:34:15,996 | INFO | ------------------------------------------------------------
+2026-01-01 15:34:15,996 | INFO | Started
+2026-01-01 15:34:21,779 | INFO | ------------------------------------------------------------
+2026-01-01 15:34:21,780 | INFO | Started
+2026-01-01 15:35:16,153 | INFO | ------------------------------------------------------------
+2026-01-01 15:35:16,153 | INFO | Started
+2026-01-01 15:38:51,193 | INFO | ------------------------------------------------------------
+2026-01-01 15:38:51,194 | INFO | Started
+2026-01-01 15:51:38,982 | INFO | ------------------------------------------------------------
+2026-01-01 15:51:38,982 | INFO | Started
+2026-01-01 15:58:28,291 | INFO | ------------------------------------------------------------
+2026-01-01 15:58:28,292 | INFO | Started
+2026-01-01 16:00:04,812 | INFO | ------------------------------------------------------------
+2026-01-01 16:00:04,813 | INFO | Started
+2026-01-01 16:02:59,195 | INFO | ------------------------------------------------------------
+2026-01-01 16:02:59,197 | INFO | Started
+2026-01-01 16:04:16,935 | INFO | ------------------------------------------------------------
+2026-01-01 16:04:16,935 | INFO | Started
+2026-01-01 16:04:39,763 | INFO | Execution duration: 21 seconds
+2026-01-01 16:08:56,822 | INFO | ------------------------------------------------------------
+2026-01-01 16:08:56,823 | INFO | Started
+2026-01-01 16:14:32,436 | INFO | ------------------------------------------------------------
+2026-01-01 16:14:32,436 | INFO | Started
+2026-01-01 16:14:56,058 | INFO | Execution duration: 21 seconds
+2026-01-01 16:16:41,479 | INFO | ------------------------------------------------------------
+2026-01-01 16:16:41,479 | INFO | Started
+2026-01-01 16:17:07,242 | INFO | Execution duration: 21.895 seconds
+2026-01-01 16:26:01,589 | INFO | ------------------------------------------------------------
+2026-01-01 16:26:01,589 | INFO | Started
+2026-01-01 16:26:19,921 | INFO | Total messages deleted across all mailboxes: 0
+2026-01-01 16:26:19,922 | INFO | Execution duration: 15.992 seconds
+2026-01-01 16:32:17,053 | INFO | ------------------------------------------------------------
+2026-01-01 16:32:17,054 | INFO | Started
+2026-01-01 16:46:24,726 | INFO | Deleted 6547 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Inbox
+2026-01-01 16:57:06,530 | INFO | Deleted 4418 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent
+2026-01-01 16:57:07,053 | INFO | Deleted 30 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2000
+2026-01-01 16:57:08,147 | INFO | Deleted 135 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2001
+2026-01-01 16:57:10,061 | INFO | Deleted 446 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2002
+2026-01-01 16:57:20,616 | INFO | Deleted 203 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2003
+2026-01-01 16:57:32,273 | INFO | Deleted 343 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2004
+2026-01-01 16:57:36,189 | INFO | Deleted 750 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2005
+2026-01-01 16:58:13,901 | INFO | Deleted 470 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2006
+2026-01-01 16:58:24,015 | INFO | Deleted 289 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2007
+2026-01-01 16:58:35,127 | INFO | Deleted 1011 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2008
+2026-01-01 16:58:36,647 | INFO | Deleted 133 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent.sbd\2001
+2026-01-01 16:58:38,384 | INFO | Deleted 123 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent.sbd\2002
+2026-01-01 16:58:40,148 | INFO | Deleted 83 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent.sbd\2003
+2026-01-01 16:58:51,002 | INFO | Deleted 313 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent.sbd\2004
+2026-01-01 16:58:51,009 | INFO | Total messages deleted across all mailboxes: 15294
+2026-01-01 16:58:51,020 | INFO | Execution duration: 26 minutes and 29.955 seconds
+2026-01-01 17:03:49,864 | INFO | ------------------------------------------------------------
+2026-01-01 17:03:49,864 | INFO | Started
+2026-01-01 17:03:54,565 | INFO | Folder selected:
+W:/Thunderbird_start_23_10_04 - kopia
+
+2026-01-01 17:06:30,459 | INFO | Backup created:
+ W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260101_17_03_54.zip
+
+2026-01-01 17:14:59,018 | INFO | Deleted 1 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2006
+2026-01-01 17:15:15,903 | INFO | Total duplicate messages deleted across all mailboxes: 1
+2026-01-01 17:15:15,903 | INFO | Execution duration: 11 minutes and 21.376 seconds
+2026-01-01 17:28:58,568 | INFO | ------------------------------------------------------------
+2026-01-01 17:28:58,569 | INFO | Started
+2026-01-01 17:29:02,816 | INFO | Folder selected:W:/Thunderbird_start_23_10_04 - kopia
+2026-01-01 17:31:34,872 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260101_17_29_02.zip
+2026-01-01 17:37:28,040 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-01 17:37:28,048 | INFO | Execution duration: 8 minutes and 26.104 seconds
+2026-01-01 17:43:53,279 | INFO | ------------------------------------------------------------
+2026-01-01 17:43:53,279 | INFO | Started
+2026-01-01 17:43:58,087 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-01 17:46:17,187 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260101_17_43_58.zip
+2026-01-01 17:52:05,989 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-01 17:52:05,998 | INFO | Execution duration: 8 minutes and 7.942 seconds
+2026-01-01 17:59:05,259 | INFO | ------------------------------------------------------------
+2026-01-01 17:59:05,260 | INFO | Started
+2026-01-01 18:04:08,315 | INFO | ------------------------------------------------------------
+2026-01-01 18:04:08,315 | INFO | Started
+2026-01-01 18:04:12,521 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-01 18:04:59,242 | INFO | ------------------------------------------------------------
+2026-01-01 18:04:59,242 | INFO | Started
+2026-01-01 18:05:07,413 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-01 18:07:31,211 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260101_18_05_07.zip
+2026-01-01 18:23:59,724 | INFO | ------------------------------------------------------------
+2026-01-01 18:23:59,724 | INFO | Started
+2026-01-01 18:24:02,747 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-01 18:26:15,863 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260101_18_24_02.zip
+2026-01-01 18:32:00,808 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-01 18:32:00,817 | INFO | Execution duration: 7 minutes and 58.101 seconds
+2026-01-01 18:36:32,565 | INFO | ------------------------------------------------------------
+2026-01-01 18:36:32,565 | INFO | Started
+2026-01-01 18:36:36,757 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-01 18:39:12,166 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260101_18_36_36.zip
+2026-01-01 18:45:52,649 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-01 18:45:52,657 | INFO | Execution duration: 9 minutes and 15.931 seconds
+2026-01-01 18:51:22,413 | INFO | ------------------------------------------------------------
+2026-01-01 18:51:22,413 | INFO | Started
+2026-01-01 18:51:41,367 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-01 18:54:09,591 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260101_18_51_41.zip
+2026-01-01 19:00:31,436 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-01 19:00:31,444 | INFO | Execution duration: 8 minutes and 50.111 seconds
+2026-01-02 14:39:56,525 | INFO | ------------------------------------------------------------
+2026-01-02 14:39:56,534 | INFO | Started
+2026-01-02 14:40:05,514 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 14:43:42,548 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_14_40_05.zip
+2026-01-02 14:52:20,145 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-02 14:52:20,177 | INFO | Execution duration: 12 minutes and 17.919 seconds
+2026-01-02 15:04:49,051 | INFO | ------------------------------------------------------------
+2026-01-02 15:04:49,052 | INFO | Started
+2026-01-02 15:04:52,522 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 15:09:31,761 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_15_04_52.zip
+2026-01-02 15:15:29,852 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-02 15:16:10,316 | INFO | Execution duration: 11 minutes and 18.87 seconds
+2026-01-02 15:16:10,317 | INFO | Done
+2026-01-02 15:23:07,778 | INFO | ------------------------------------------------------------
+2026-01-02 15:23:07,778 | INFO | Started
+2026-01-02 15:23:12,968 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 15:26:44,813 | INFO | ------------------------------------------------------------
+2026-01-02 15:26:44,813 | INFO | Started
+2026-01-02 15:27:52,069 | INFO | ------------------------------------------------------------
+2026-01-02 15:27:52,069 | INFO | Started
+2026-01-02 15:33:05,859 | INFO | ------------------------------------------------------------
+2026-01-02 15:33:05,859 | INFO | Started
+2026-01-02 15:33:58,906 | INFO | ------------------------------------------------------------
+2026-01-02 15:33:58,906 | INFO | Started
+2026-01-02 15:35:40,213 | INFO | ------------------------------------------------------------
+2026-01-02 15:35:40,213 | INFO | Started
+2026-01-02 15:36:11,398 | INFO | ------------------------------------------------------------
+2026-01-02 15:36:11,398 | INFO | Started
+2026-01-02 15:36:15,685 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 15:37:46,381 | INFO | ------------------------------------------------------------
+2026-01-02 15:37:46,381 | INFO | Started
+2026-01-02 15:37:50,890 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 15:49:25,787 | INFO | ------------------------------------------------------------
+2026-01-02 15:49:25,787 | INFO | Started
+2026-01-02 15:49:35,584 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 15:50:25,276 | INFO | ------------------------------------------------------------
+2026-01-02 15:50:25,277 | INFO | Started
+2026-01-02 15:50:27,453 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 15:53:09,760 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_15_50_27.zip
+2026-01-02 15:59:38,678 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-02 15:59:44,696 | INFO | Finished. Execution duration: 9 minutes and 17.281 seconds
+2026-01-02 16:23:03,958 | INFO | ------------------------------------------------------------
+2026-01-02 16:23:03,958 | INFO | Started
+2026-01-02 16:23:47,451 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 16:26:28,962 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_16_23_47.zip
+2026-01-02 16:38:45,699 | INFO | ------------------------------------------------------------
+2026-01-02 16:38:45,699 | INFO | Started
+2026-01-02 16:39:00,427 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 16:41:31,209 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_16_39_00.zip
+2026-01-02 16:53:25,828 | INFO | ------------------------------------------------------------
+2026-01-02 16:53:25,829 | INFO | Started
+2026-01-02 16:55:06,581 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 16:57:31,935 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_16_55_06.zip
+2026-01-02 17:19:43,916 | INFO | ------------------------------------------------------------
+2026-01-02 17:19:43,916 | INFO | Started
+2026-01-02 17:19:51,284 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 17:22:17,838 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_17_19_51.zip
+2026-01-02 17:28:54,875 | CRITICAL | Uncaught exception
+Traceback (most recent call last):
+  File "w:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\app_gui.py", line 225, in start_scan
+    mboxes, msg_for_output_box, total_messages_deleted = process_mboxes(mboxes, self.progress_bar)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "w:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\functions\process_mboxes.py", line 25, in process_mboxes
+    mbox, msg, messages_deleted = process_one_mbox(mbox)
+                                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "w:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\functions\process_1_mbox.py", line 16, in process_one_mbox
+    mbox = mailbox.mbox(mbox_path) # ///////////////////////////////////////
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anaconda3\envs\thunderbird_deduper\Lib\mailbox.py", line 855, in __init__
+    _mboxMMDF.__init__(self, path, factory, create)
+  File "d:\anaconda3\envs\thunderbird_deduper\Lib\mailbox.py", line 582, in __init__
+    Mailbox.__init__(self, path, factory, create)
+  File "d:\anaconda3\envs\thunderbird_deduper\Lib\mailbox.py", line 39, in __init__
+    self._path = os.path.abspath(os.path.expanduser(path))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen ntpath>", line 355, in expanduser
+TypeError: expected str, bytes or os.PathLike object, not mbox
+2026-01-02 17:33:27,960 | INFO | ------------------------------------------------------------
+2026-01-02 17:33:27,960 | INFO | Started
+2026-01-02 17:33:31,526 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 17:36:03,918 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_17_33_31.zip
+2026-01-02 17:42:22,215 | CRITICAL | Uncaught exception
+Traceback (most recent call last):
+  File "w:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\app_gui.py", line 225, in start_scan
+    mboxes, msg_for_output_box, total_messages_deleted = process_mboxes(mboxes, self.progress_bar)
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "w:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\functions\process_mboxes.py", line 25, in process_mboxes
+    mbox, msg, messages_deleted = process_one_mbox(mbox)
+                                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "w:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\functions\process_1_mbox.py", line 16, in process_one_mbox
+    mbox = mailbox.mbox(mbox_path) # ///////////////////////////////////////
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\anaconda3\envs\thunderbird_deduper\Lib\mailbox.py", line 855, in __init__
+    _mboxMMDF.__init__(self, path, factory, create)
+  File "d:\anaconda3\envs\thunderbird_deduper\Lib\mailbox.py", line 582, in __init__
+    Mailbox.__init__(self, path, factory, create)
+  File "d:\anaconda3\envs\thunderbird_deduper\Lib\mailbox.py", line 39, in __init__
+    self._path = os.path.abspath(os.path.expanduser(path))
+                                 ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "<frozen ntpath>", line 355, in expanduser
+TypeError: expected str, bytes or os.PathLike object, not mbox
+2026-01-02 18:15:50,742 | INFO | ------------------------------------------------------------
+2026-01-02 18:15:50,745 | INFO | Started
+2026-01-02 18:16:19,167 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 18:19:17,380 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_18_16_19.zip
+2026-01-02 18:26:51,680 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-02 18:26:51,710 | INFO | Finished. Execution duration: 10 minutes and 35.414 seconds
+2026-01-02 18:43:54,943 | INFO | ------------------------------------------------------------
+2026-01-02 18:43:54,943 | INFO | Started
+2026-01-02 18:52:04,208 | INFO | ------------------------------------------------------------
+2026-01-02 18:52:04,208 | INFO | Started
+2026-01-02 18:52:10,773 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 18:57:55,554 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_18_52_10.zip
+2026-01-02 19:02:38,821 | INFO | Deleted 6547 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Inbox
+2026-01-02 19:11:11,162 | INFO | Deleted 4418 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent
+2026-01-02 19:11:11,794 | INFO | Deleted 30 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2000
+2026-01-02 19:11:13,082 | INFO | Deleted 135 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2001
+2026-01-02 19:11:15,003 | INFO | Deleted 446 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2002
+2026-01-02 19:11:24,124 | INFO | Deleted 203 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2003
+2026-01-02 19:11:35,211 | INFO | Deleted 343 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2004
+2026-01-02 19:11:40,099 | INFO | Deleted 750 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2005
+2026-01-02 19:12:15,564 | INFO | Deleted 470 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2006
+2026-01-02 19:12:26,736 | INFO | Deleted 289 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2007
+2026-01-02 19:12:36,161 | INFO | Deleted 1011 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2008
+2026-01-02 19:12:37,572 | INFO | Deleted 133 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent.sbd\2001
+2026-01-02 19:12:39,318 | INFO | Deleted 123 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent.sbd\2002
+2026-01-02 19:12:41,030 | INFO | Deleted 83 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent.sbd\2003
+2026-01-02 19:12:50,345 | INFO | Deleted 313 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\Sent.sbd\2004
+2026-01-02 19:12:50,357 | INFO | Total duplicate messages deleted across all mailboxes: 15294
+2026-01-02 19:12:50,367 | INFO | Finished. Execution duration: 20 minutes and 40.54 seconds
+2026-01-02 19:16:41,584 | INFO | ------------------------------------------------------------
+2026-01-02 19:16:41,584 | INFO | Started
+2026-01-02 19:16:45,766 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 19:19:32,433 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_19_16_45.zip
+2026-01-02 19:27:25,171 | INFO | Deleted 1 duplicate messages from mbox W:/Thunderbird_start_23_10_04 - kopia\INBOX.sbd\2006
+2026-01-02 19:27:46,110 | INFO | Total duplicate messages deleted across all mailboxes: 1
+2026-01-02 19:28:09,381 | INFO | Finished. Execution duration: 11 minutes and 23.671 seconds
+2026-01-02 19:32:09,996 | INFO | ------------------------------------------------------------
+2026-01-02 19:32:09,996 | INFO | Started
+2026-01-02 19:32:17,453 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 19:36:27,357 | INFO | ------------------------------------------------------------
+2026-01-02 19:36:27,357 | INFO | Started
+2026-01-02 19:36:43,784 | INFO | ------------------------------------------------------------
+2026-01-02 19:36:43,785 | INFO | Started
+2026-01-02 19:37:50,662 | CRITICAL | Uncaught exception
+Traceback (most recent call last):
+  File "w:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\app_gui.py", line 203, in start_scan
+    self.browse_button.setEnabled(False)
+    ^^^^^^^^^^^^^^^^^^
+AttributeError: 'MainWindow' object has no attribute 'browse_button'
+2026-01-02 19:47:36,267 | INFO | ------------------------------------------------------------
+2026-01-02 19:47:36,288 | INFO | Started
+2026-01-02 19:47:41,408 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-02 19:50:40,876 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260102_19_47_41.zip
