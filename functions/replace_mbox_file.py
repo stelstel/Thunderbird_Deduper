@@ -3,6 +3,7 @@
 import os
 import mailbox
 import logging
+import time
 
 
 
@@ -15,8 +16,15 @@ def write_mbox_file(mbox_path, messages):
             # logging.error(f"Error deleting old MBOX file {mbox_path}: {str(e)}")
             logging.exception(f"Error deleting old MBOX file {mbox_path}: {str(e)}")
 
-    # Create new mailbox
+    # Wait until the lock file is gone
+    lock_file = mbox_path + ".lock"
+    wait_seconds = 1
 
+    while os.path.exists(lock_file) and wait_seconds < 10:  # max 10 seconds
+        time.sleep(0.5)
+        wait_seconds += 0.5
+
+    # Create new mailbox
     try:
         mbox = mailbox.mbox(mbox_path)
         mbox.lock()

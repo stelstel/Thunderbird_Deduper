@@ -24,7 +24,7 @@ from datetime import datetime
 from functions.functions import log_uncaught_exceptions, is_thunderbird_running, calc_duration, format_size
 
 setup_logging()
-logging.info("-" * 60)
+logging.info("-" * 80)
 logging.info("Started Thunderbird Duplicate Email Remover.")
 LOG_FILE = os.path.join("logs", "thunderbird_deduper.log")
 
