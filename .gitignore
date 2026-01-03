@@ -1,3 +1,10 @@
 __pycache__/
 *.pyc
 *.pyo
+mail_folder_backups/
+*.zip
+logs/
+dist/
+build/
+.venv/
+

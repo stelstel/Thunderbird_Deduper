@@ -13,7 +13,7 @@ from functions.replace_mbox_file import write_mbox_file
 
 def process_one_mbox(mbox_path):
     msg = ""
-    mbox = mailbox.mbox(mbox_path) # ///////////////////////////////////////
+    mbox = mailbox.mbox(mbox_path)
     msg_checksums = get_messages_fingerprint_hashed_list(mbox_path)
     counts = Counter(msg_checksums)
     

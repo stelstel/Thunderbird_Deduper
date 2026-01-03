@@ -3,6 +3,7 @@
 import sys
 import os
 import logging
+import time
 
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QLabel, QLineEdit,
@@ -11,7 +12,8 @@ from PySide6.QtWidgets import (
 )
 
 from PySide6.QtGui import QAction
-from PySide6.QtCore import Qt
+from PySide6.QtCore import Qt, QTimer
+
 from config import load_config, save_config
 from functions.scanner import find_mbox_files, parse_all_mailboxes
 from functions.backup_mail_folder import backup_folder
@@ -19,20 +21,36 @@ from functions.process_1_mbox import process_one_mbox # TODO Not used here but m
 from functions.process_mboxes import process_mboxes
 from functions.logging_setup import setup_logging
 from datetime import datetime
+from functions.functions import log_uncaught_exceptions, is_thunderbird_running
 
 setup_logging()
 logging.info("-" * 60)
 logging.info("Started")
 LOG_FILE = os.path.join("logs", "thunderbird_deduper.log")
 
-# Global “catch-all”
-def log_uncaught_exceptions(exctype, value, tb):
-    logging.critical(
-        "Uncaught exception",
-        exc_info=(exctype, value, tb)
-    )
 
+
+def calc_duration(start_time, end_time):
+    duration = end_time - start_time
+    duration_minutes = duration.seconds / 60
+    duration_seconds = duration.seconds % 60
+    duration_millis = duration.microseconds // 1000
+    
+    if duration_minutes < 1:
+        duration_mins_secs = f"{duration_seconds}.{duration_millis} seconds"
+    elif duration_minutes == 1:
+        duration_mins_secs = f"1 minute and {duration_seconds}.{duration_millis} seconds"
+    else:
+        duration_mins_secs = f"{int(duration_minutes)} minutes and {duration_seconds}.{duration_millis} seconds"
+    
+    return duration_mins_secs
+
+
+
+# Set global exception handler
 sys.excepthook = log_uncaught_exceptions
+
+
 
 class MainWindow(QMainWindow):
     """
@@ -70,7 +88,7 @@ class MainWindow(QMainWindow):
         progress_layout.addWidget(self.progress_bar)
 
         self.progress_bar.setMinimum(0)
-        self.progress_bar.setMaximum(100)  # Will be set dynamically later
+        self.progress_bar.setMaximum(100)
         self.progress_bar.setValue(0)
 
         # Load config
@@ -98,8 +116,6 @@ class MainWindow(QMainWindow):
         help_menu.addAction(about_action)
         view_log_action = help_menu.addAction("View Log")
         view_log_action.triggered.connect(self.open_log_file)
-
-
 
         # -------------------------------------------------
         # WIDGETS
@@ -160,8 +176,6 @@ class MainWindow(QMainWindow):
         if folder:
             self.folder_input.setText(folder)
 
-
-
     # -------------------------------------------------
     # Help → About
     # -------------------------------------------------
@@ -176,8 +190,6 @@ class MainWindow(QMainWindow):
             )
         )
     
-
-
     # -------------------------------------------------
     # Help → View Log
     # -------------------------------------------------
@@ -191,12 +203,31 @@ class MainWindow(QMainWindow):
                 "The log file does not exist yet."
             )
 
-
-
     # -------------------------------------------------
     # Scan Button Logic
     # -------------------------------------------------
     def start_scan(self):
+
+        # -------------------------------------------------
+        # THUNDERBIRD RUNNING CHECK
+        # -------------------------------------------------
+        msg_box = QMessageBox(self)
+        msg_box.setIcon(QMessageBox.Warning)
+        msg_box.setWindowTitle("Thunderbird is running")
+        
+        msg_box.setText(
+            "Thunderbird locks mailbox files while running.\n\n"
+            "Please exit this program, close Thunderbird and start this program again."
+        )
+
+        exit_button = msg_box.addButton("Exit", QMessageBox.RejectRole)
+        exit_button.clicked.connect(QApplication.quit)
+
+        if is_thunderbird_running():
+            msg_box.open()
+
+
+
         start_time = datetime.now()
 
         # Disable button & change text
@@ -248,6 +279,11 @@ class MainWindow(QMainWindow):
             
             self.progress_bar.setValue(self.progress_bar.maximum())
             self.progress_label.setText("Finished")
+            self.output_box.append(msg_for_output_box)
+            
+            end_time = datetime.now()
+            duration_mins_secs = calc_duration(start_time, end_time)
+            logging.info(f"Finished. Execution duration: {duration_mins_secs}")
 
             # Show summary message box
             QMessageBox.information(
@@ -255,31 +291,11 @@ class MainWindow(QMainWindow):
                 "Scan complete",
                 f"\nTotal duplicate messages deleted across all mailboxes: {total_messages_deleted}"
             )
-
-            self.output_box.append(msg_for_output_box)
-            
-            end_time = datetime.now()
-            duration = end_time - start_time
-            duration_minutes = duration.seconds / 60
-            duration_seconds = duration.seconds % 60
-            duration_millis = duration.microseconds // 1000
-            
-            if duration_minutes < 1:
-                duration_mins_secs = f"{duration_seconds}.{duration_millis} seconds"
-            elif duration_minutes == 1:
-                duration_mins_secs = f"1 minute and {duration_seconds}.{duration_millis} seconds"
-            else:
-                duration_mins_secs = f"{int(duration_minutes)} minutes and {duration_seconds}.{duration_millis} seconds"
-
-            logging.info(f"Finished. Execution duration: {duration_mins_secs}")
-
         finally:
             # Re-enable scan button & restore text
             self.browse_button.setEnabled(True)
             self.scan_button.setEnabled(True)
             self.scan_button.setText(original_text)
-
-
 
 # -------------------------------------------------
 # MAIN

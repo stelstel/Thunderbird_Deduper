@@ -16,10 +16,11 @@ def write_mbox_file(mbox_path, messages):
             logging.exception(f"Error deleting old MBOX file {mbox_path}: {str(e)}")
 
     # Create new mailbox
-    mbox = mailbox.mbox(mbox_path)
-    mbox.lock()
 
     try:
+        mbox = mailbox.mbox(mbox_path)
+        mbox.lock()
+        
         for msg in messages:
             mbox.add(msg)
         
