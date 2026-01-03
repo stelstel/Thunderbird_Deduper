@@ -23,3 +23,20 @@ def is_thunderbird_running() -> bool:
             pass
     return False
 
+
+
+def calc_duration(start_time, end_time):
+    duration = end_time - start_time
+    duration_minutes = duration.seconds / 60
+    duration_seconds = duration.seconds % 60
+    duration_millis = duration.microseconds // 1000
+    
+    if duration_minutes < 1:
+        duration_mins_secs = f"{duration_seconds}.{duration_millis} seconds"
+    elif duration_minutes == 1:
+        duration_mins_secs = f"1 minute and {duration_seconds}.{duration_millis} seconds"
+    else:
+        duration_mins_secs = f"{int(duration_minutes)} minutes and {duration_seconds}.{duration_millis} seconds"
+    
+    return duration_mins_secs
+

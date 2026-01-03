@@ -12,40 +12,21 @@ from PySide6.QtWidgets import (
 )
 
 from PySide6.QtGui import QAction
-from PySide6.QtCore import Qt, QTimer
+from PySide6.QtCore import Qt
 
 from config import load_config, save_config
 from functions.scanner import find_mbox_files, parse_all_mailboxes
 from functions.backup_mail_folder import backup_folder
-from functions.process_1_mbox import process_one_mbox # TODO Not used here but may be needed elsewhere
+# from functions.process_1_mbox import process_one_mbox # TODO Not used here but may be needed elsewhere
 from functions.process_mboxes import process_mboxes
 from functions.logging_setup import setup_logging
 from datetime import datetime
-from functions.functions import log_uncaught_exceptions, is_thunderbird_running
+from functions.functions import log_uncaught_exceptions, is_thunderbird_running, calc_duration
 
 setup_logging()
 logging.info("-" * 60)
-logging.info("Started")
+logging.info("Started Thunderbird Duplicate Email Remover.")
 LOG_FILE = os.path.join("logs", "thunderbird_deduper.log")
-
-
-
-def calc_duration(start_time, end_time):
-    duration = end_time - start_time
-    duration_minutes = duration.seconds / 60
-    duration_seconds = duration.seconds % 60
-    duration_millis = duration.microseconds // 1000
-    
-    if duration_minutes < 1:
-        duration_mins_secs = f"{duration_seconds}.{duration_millis} seconds"
-    elif duration_minutes == 1:
-        duration_mins_secs = f"1 minute and {duration_seconds}.{duration_millis} seconds"
-    else:
-        duration_mins_secs = f"{int(duration_minutes)} minutes and {duration_seconds}.{duration_millis} seconds"
-    
-    return duration_mins_secs
-
-
 
 # Set global exception handler
 sys.excepthook = log_uncaught_exceptions

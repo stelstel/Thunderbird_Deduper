@@ -553,3 +553,21 @@ AttributeError: 'MainWindow' object has no attribute 'continue_button'
 2026-01-03 15:53:27,190 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260103_15_53_14.zip
 2026-01-03 15:53:29,947 | INFO | Total duplicate messages deleted across all mailboxes: 0
 2026-01-03 15:53:29,950 | INFO | Finished. Execution duration: 15.873 seconds
+2026-01-03 15:57:00,502 | INFO | ------------------------------------------------------------
+2026-01-03 15:57:00,502 | INFO | Started
+2026-01-03 15:57:02,751 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-03 15:57:14,680 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260103_15_57_02.zip
+2026-01-03 15:57:16,927 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-03 15:57:16,928 | INFO | Finished. Execution duration: 14.209 seconds
+2026-01-03 15:59:10,644 | INFO | ------------------------------------------------------------
+Started Thunderbird Duplicate Email Remover
+2026-01-03 15:59:12,753 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-03 15:59:25,238 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260103_15_59_12.zip
+2026-01-03 15:59:27,695 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-03 15:59:27,697 | INFO | Finished. Execution duration: 14.978 seconds
+2026-01-03 16:00:11,471 | INFO | ------------------------------------------------------------
+2026-01-03 16:00:11,471 | INFO | Started Thunderbird Duplicate Email Remover.
+2026-01-03 16:00:13,891 | INFO | Folder selected: W:/Thunderbird_start_23_10_04 - kopia
+2026-01-03 16:00:26,874 | INFO | Backup created: W:\Plugga\2024-2025\BI\Python\Thunderbird_Deduper\mail_folder_backups\ThunderB_Mail_Folder_Backup_20260103_16_00_13.zip
+2026-01-03 16:00:29,205 | INFO | Total duplicate messages deleted across all mailboxes: 0
+2026-01-03 16:00:29,207 | INFO | Finished. Execution duration: 15.351 seconds
