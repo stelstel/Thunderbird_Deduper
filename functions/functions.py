@@ -2,6 +2,7 @@
 
 import logging
 import psutil
+import os
 
 
 
@@ -39,4 +40,19 @@ def calc_duration(start_time, end_time):
         duration_mins_secs = f"{int(duration_minutes)} minutes and {duration_seconds}.{duration_millis} seconds"
     
     return duration_mins_secs
+
+
+
+def format_size(bytes_size):
+    """Convert a size in bytes to a human-readable string."""
+    for unit in ["B", "KB", "MB", "GB", "TB"]:
+        if bytes_size < 1024:
+            return f"{bytes_size:.2f} {unit}"
+        bytes_size /= 1024
+    return f"{bytes_size:.2f} PB"  # unlikely to reach here
+
+# backup_file = "path/to/backup.zip"
+# file_size = os.path.getsize(backup_file)
+# print(f"Backup size: {format_size(file_size)}")
+
 

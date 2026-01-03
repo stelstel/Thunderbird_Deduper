@@ -21,7 +21,7 @@ from functions.backup_mail_folder import backup_folder
 from functions.process_mboxes import process_mboxes
 from functions.logging_setup import setup_logging
 from datetime import datetime
-from functions.functions import log_uncaught_exceptions, is_thunderbird_running, calc_duration
+from functions.functions import log_uncaught_exceptions, is_thunderbird_running, calc_duration, format_size
 
 setup_logging()
 logging.info("-" * 60)
@@ -57,7 +57,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Thunderbird Duplicate Email Remover")
-        self.setMinimumSize(500, 400)
+        self.setMinimumSize(700, 600)
 
         self.progress_bar = QProgressBar()
         self.progress_label = QLabel("")
@@ -236,11 +236,13 @@ class MainWindow(QMainWindow):
             logging.info(f"Folder selected: {folder}")
             QApplication.processEvents()   # Force GUI refresh
             backup_file = backup_folder(folder)
-            self.output_box.append(f"✔ Backup created:\n {backup_file}\n")
-            logging.info(f"Backup created: {backup_file}")
+            file_size = os.path.getsize(backup_file)
+            formatted_file_size = format_size(file_size)
+
+            self.output_box.append(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file}\n")
+            logging.info(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file}\n")
             self.progress_bar.setValue(29)
 
-            # self.scan_button.setText("Scanning for duplicate mails...")
             self.progress_label.setText("Scanning for duplicate mails...") 
             QApplication.processEvents()   # Force GUI refresh
 
@@ -248,8 +250,6 @@ class MainWindow(QMainWindow):
 
             self.mbox_list.clear()
             self.mbox_list.addItems(mboxes)
-
-            # all_messages = parse_all_mailboxes(folder) # ////////////////////////// ???
 
             mboxes, msg_for_output_box, total_messages_deleted = process_mboxes(mboxes, self.progress_bar) 
             
