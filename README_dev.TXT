@@ -9,6 +9,7 @@ TODO:
     Hash all the message? Put option to choose that
     Checkboxes for mail folders
     Icon
+    Update the comments
 
 BUGS:
     Seems to not delete all duplicates. 
