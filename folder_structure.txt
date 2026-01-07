@@ -16,8 +16,11 @@ thunderbird_deduper/
 │
 ├── build/                  # Empty at first; PyInstaller can output here
 ├── models/
-    ├── __init__.py
-    └── mailbox.py
+│   ├── __init__.py
+│   └── mailbox.py
+│
+├── tests/
+
 
 🔍 What each file does
 1. app_gui.py (main file)
