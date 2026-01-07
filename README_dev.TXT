@@ -1,6 +1,8 @@
 **Thunderbird Duplicate Email Remover**
 
-Run app_gui.py
+Run app_gui.py to run the program
+
+Write pytest to run the tests
 
 TODO:
     Tests
