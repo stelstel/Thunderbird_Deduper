@@ -10,8 +10,8 @@ TODO:
 
 BUGS:
     Seems to not delete all duplicates. 
-    First run:  "Total messages deleted across all mailboxes: 15294"
-    Next run:   "Total duplicate messages deleted across all mailboxes: 1"
+        First run:  "Total messages deleted across all mailboxes: 15294"
+        Next run:   "Total duplicate messages deleted across all mailboxes: 1"
 
 
 Logging levels

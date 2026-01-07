@@ -4,7 +4,7 @@ import os
 
 from functions.parser import get_messages_from_mbox
 
-def find_mbox_files(root_folder: str):
+def find_mbox_files(root_folder: str, exclude_trash_files: bool):
     """
     Recursively search for MBOX format email files in a directory tree.
     Scans the specified root folder and all subdirectories for MBOX files,
@@ -37,8 +37,9 @@ def find_mbox_files(root_folder: str):
                 continue
 
             # Skip Trash folders
-            if "trash" in filename.lower() or "trash" in dirpath.lower():
-                continue
+            if exclude_trash_files:
+                if "trash" in filename.lower() or "trash" in dirpath.lower():
+                    continue
 
             full_path = os.path.join(dirpath, filename)
 

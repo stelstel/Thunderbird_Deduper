@@ -8,7 +8,8 @@ import time
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QLabel, QLineEdit,
     QPushButton, QVBoxLayout, QHBoxLayout, QFileDialog,
-    QListWidget, QTextEdit, QMessageBox, QProgressBar
+    QListWidget, QTextEdit, QMessageBox, QProgressBar,
+    QCheckBox
 )
 
 from PySide6.QtGui import QAction
@@ -17,7 +18,6 @@ from PySide6.QtCore import Qt
 from config import load_config, save_config
 from functions.scanner import find_mbox_files, parse_all_mailboxes
 from functions.backup_mail_folder import backup_folder
-# from functions.process_1_mbox import process_one_mbox # TODO Not used here but may be needed elsewhere
 from functions.process_mboxes import process_mboxes
 from functions.logging_setup import setup_logging
 from datetime import datetime
@@ -63,14 +63,14 @@ class MainWindow(QMainWindow):
         self.progress_label = QLabel("")
         self.progress_label.setFixedWidth(170)
         self.progress_label.setAlignment(Qt.AlignRight | Qt.AlignVCenter)
+        self.progress_bar.setMinimum(0)
+        self.progress_bar.setMaximum(100)
+        self.progress_bar.setValue(0)
 
         progress_layout = QHBoxLayout()
         progress_layout.addWidget(self.progress_label)
         progress_layout.addWidget(self.progress_bar)
 
-        self.progress_bar.setMinimum(0)
-        self.progress_bar.setMaximum(100)
-        self.progress_bar.setValue(0)
 
         # Load config
         self.config = load_config()
@@ -112,9 +112,16 @@ class MainWindow(QMainWindow):
         folder_layout.addWidget(self.folder_input)
         folder_layout.addWidget(self.browse_button)
 
+        self.checkbox_trash = QCheckBox('Exclude trash folders', self)
+        self.checkbox_trash.setChecked(True)
+
         self.scan_button = QPushButton("Start")
         self.scan_button.setFixedWidth(125)
         self.scan_button.clicked.connect(self.start_scan)
+        
+        scan_layout = QHBoxLayout()
+        scan_layout.addWidget(self.checkbox_trash)
+        scan_layout.addWidget(self.scan_button)
 
         mbox_label = QLabel("Mailbox files found:")
         self.mbox_list = QListWidget()
@@ -130,7 +137,9 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout()
         layout.addWidget(folder_label)
         layout.addLayout(folder_layout)
-        layout.addWidget(self.scan_button)
+        # layout.addWidget(self.checkbox)
+        # layout.addWidget(self.scan_button)
+        layout.addLayout(scan_layout)
         layout.addLayout(progress_layout)
         layout.addWidget(mbox_label)
         layout.addWidget(self.mbox_list)
@@ -189,6 +198,8 @@ class MainWindow(QMainWindow):
     # -------------------------------------------------
     def start_scan(self):
 
+        # print(self.checkbox_trash.isChecked()) # /////////////////////////////////
+
         # -------------------------------------------------
         # THUNDERBIRD RUNNING CHECK
         # -------------------------------------------------
@@ -206,7 +217,6 @@ class MainWindow(QMainWindow):
 
         if is_thunderbird_running():
             msg_box.open()
-
 
 
         start_time = datetime.now()
@@ -246,7 +256,7 @@ class MainWindow(QMainWindow):
             self.progress_label.setText("Scanning for duplicate mails...") 
             QApplication.processEvents()   # Force GUI refresh
 
-            mboxes = find_mbox_files(folder)
+            mboxes = find_mbox_files(folder, self.checkbox_trash.isChecked())
 
             self.mbox_list.clear()
             self.mbox_list.addItems(mboxes)
