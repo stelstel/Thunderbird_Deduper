@@ -5,7 +5,9 @@ Run app_gui.py to run the program
 Write pytest to run the tests
 
 TODO:
-    Tests
+    Add exclude trash choice to config
+    -II- compression level -II-
+    More tests
     Hash all the message? Put option to choose that
     Checkboxes for mail folders
     Icon
@@ -28,3 +30,10 @@ ERROR	    Operation failed
 CRITICAL	App cannot continue
 
 Start with INFO.
+
+
+INFORMATION:
+    Zip compression level 1: Size: 2.05 GB, Backup duration: 2 minutes and 26.657 seconds
+    Zip compression level 9: Size: 1.99 GB, Backup duration: 3 minutes and 33.458 seconds
+
+    A small difference in size for a big difference in time. Keep the level low.

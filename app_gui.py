@@ -198,8 +198,6 @@ class MainWindow(QMainWindow):
     # -------------------------------------------------
     def start_scan(self):
 
-        # print(self.checkbox_trash.isChecked()) # /////////////////////////////////
-
         # -------------------------------------------------
         # THUNDERBIRD RUNNING CHECK
         # -------------------------------------------------
@@ -245,16 +243,24 @@ class MainWindow(QMainWindow):
             self.progress_bar.setValue(1)
             logging.info(f"Folder selected: {folder}")
             QApplication.processEvents()   # Force GUI refresh
+            
+            # ------------- Backing up ------------------------
             backup_file = backup_folder(folder)
+
+            # backup_finished_time = datetime.now() # ///////////////////////////
+            # duration_mins_secs = calc_duration(start_time, backup_finished_time) # ///////////////////////////
+            # logging.info(f"Backup duration: {duration_mins_secs}") # ///////////////////////////
+
             file_size = os.path.getsize(backup_file)
             formatted_file_size = format_size(file_size)
 
             self.output_box.append(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file}\n")
             logging.info(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file}\n")
+                        
             self.progress_bar.setValue(29)
 
             self.progress_label.setText("Scanning for duplicate mails...") 
-            QApplication.processEvents()   # Force GUI refresh
+            # QApplication.processEvents()   # Force GUI refresh. Needed? /////////////////////////////////////////
 
             mboxes = find_mbox_files(folder, self.checkbox_trash.isChecked())
 
