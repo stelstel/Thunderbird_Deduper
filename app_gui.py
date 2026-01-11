@@ -3,7 +3,7 @@
 import sys
 import os
 import logging
-import time
+import time # Remove? //////////////////////////////
 
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QLabel, QLineEdit,
@@ -113,7 +113,7 @@ class MainWindow(QMainWindow):
         folder_layout.addWidget(self.browse_button)
 
         self.checkbox_trash = QCheckBox('Exclude trash folders', self)
-        self.checkbox_trash.setChecked(True)
+        self.checkbox_trash.setChecked(eval( self.config["exclude_trash_folders"] ) )
 
         self.scan_button = QPushButton("Start")
         self.scan_button.setFixedWidth(125)
@@ -137,8 +137,6 @@ class MainWindow(QMainWindow):
         layout = QVBoxLayout()
         layout.addWidget(folder_label)
         layout.addLayout(folder_layout)
-        # layout.addWidget(self.checkbox)
-        # layout.addWidget(self.scan_button)
         layout.addLayout(scan_layout)
         layout.addLayout(progress_layout)
         layout.addWidget(mbox_label)
@@ -166,6 +164,8 @@ class MainWindow(QMainWindow):
         if folder:
             self.folder_input.setText(folder)
 
+
+
     # -------------------------------------------------
     # Help → About
     # -------------------------------------------------
@@ -179,7 +179,9 @@ class MainWindow(QMainWindow):
                 f"Version {self.version}"
             )
         )
-    
+
+
+
     # -------------------------------------------------
     # Help → View Log
     # -------------------------------------------------
@@ -192,6 +194,8 @@ class MainWindow(QMainWindow):
                 "Log file not found",
                 "The log file does not exist yet."
             )
+
+
 
     # -------------------------------------------------
     # Scan Button Logic
@@ -262,7 +266,7 @@ class MainWindow(QMainWindow):
             self.progress_label.setText("Scanning for duplicate mails...") 
             # QApplication.processEvents()   # Force GUI refresh. Needed? /////////////////////////////////////////
 
-            mboxes = find_mbox_files(folder, self.checkbox_trash.isChecked())
+            mboxes = find_mbox_files(folder, self.checkbox_trash.isChecked() )
 
             self.mbox_list.clear()
             self.mbox_list.addItems(mboxes)
