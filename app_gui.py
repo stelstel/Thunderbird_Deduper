@@ -23,7 +23,9 @@ from functions.logging_setup import setup_logging
 from datetime import datetime
 from functions.functions import log_uncaught_exceptions, is_thunderbird_running, calc_duration, format_size
 
-setup_logging()
+DEBUG_MODE = False
+
+setup_logging(debug=DEBUG_MODE)
 logging.info("-" * 80)
 logging.info("Started Thunderbird Duplicate Email Remover.")
 LOG_FILE = os.path.join("logs", "thunderbird_deduper.log")
@@ -34,25 +36,6 @@ sys.excepthook = log_uncaught_exceptions
 
 
 class MainWindow(QMainWindow):
-    """
-    MainWindow class for Thunderbird Duplicate Email Remover GUI application.
-    This class creates and manages the main window of the application, providing a user interface
-    for scanning Thunderbird mailbox directories and removing duplicate emails.
-    Attributes:
-        progress_bar (QProgressBar): Progress bar widget showing scan completion percentage.
-        progress_label (QLabel): Label displaying current operation status.
-        folder_input (QLineEdit): Text input field for Thunderbird folder path.
-        scan_button (QPushButton): Button to initiate the scan and deduplication process.
-        mbox_list (QListWidget): List widget displaying found mailbox files.
-        output_box (QTextEdit): Read-only text area for operation results and messages.
-        config (dict): Configuration dictionary loaded from config file.
-        version (str): Application version from config.
-    Methods:
-        browse_folder(): Opens a file dialog to select Thunderbird Local Folders directory.
-        show_about_dialog(): Displays application information dialog.
-        open_log_file(): Opens the application log file in the system's default text editor.
-        start_scan(): Initiates the mailbox scan, backup creation, and duplicate email removal process.
-    """
     def __init__(self):
         super().__init__()
 
@@ -251,9 +234,10 @@ class MainWindow(QMainWindow):
             # ------------- Backing up ------------------------
             backup_file = backup_folder(folder)
 
-            # backup_finished_time = datetime.now() # ///////////////////////////
-            # duration_mins_secs = calc_duration(start_time, backup_finished_time) # ///////////////////////////
-            # logging.info(f"Backup duration: {duration_mins_secs}") # ///////////////////////////
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                backup_finished_time = datetime.now() # ///////////////////////////
+                duration_mins_secs = calc_duration(start_time, backup_finished_time) # ///////////////////////////
+                logging.debug(f"Backup duration: {duration_mins_secs}") # ///////////////////////////
 
             file_size = os.path.getsize(backup_file)
             formatted_file_size = format_size(file_size)
