@@ -1,17 +1,16 @@
 # functions/backup_mail_folder.py
 
-# import shutil # ////////////////////////////////////////////////// Not used?
 import datetime
 import os
 import zipfile
 
-from config import load_config
+# from config import load_config # ///////////////////////////////////////////
 
-def backup_folder(source_folder):
+def backup_folder(source_folder, cfg):
     backup_dir = "mail_folder_backups"
     backup_file_name_start = "ThunderB_Mail_Folder_Backup"
-    config = load_config()
-    zip_compression_level = int( config["backup_zip_file_compr_level"] )
+    # config = load_config() # ///////////////////////////////////////////////
+    zip_compression_level = int( cfg["backup_zip_file_compr_level"] )
     os.makedirs(backup_dir, exist_ok = True) # Ensure backup directory exists
 
     timestamp = datetime.datetime.now().strftime("%Y%m%d_%H_%M_%S")

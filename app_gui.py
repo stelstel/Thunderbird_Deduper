@@ -234,7 +234,7 @@ class MainWindow(QMainWindow):
             QApplication.processEvents()   # Force GUI refresh
             
             # ------------- Backing up ------------------------
-            backup_file = backup_folder(folder)
+            backup_file = backup_folder(folder, self.config)
 
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 backup_finished_time = datetime.now() # ///////////////////////////
