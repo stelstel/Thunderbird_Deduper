@@ -6,13 +6,13 @@ thunderbird_deduper/
 ├── mbox_utils.py           # Helper functions for reading MBOX safely
 │
 ├── config/
-│   └── config.json       # Optional user settings (e.g., backup options)
+│   └── config.json         # Optional user settings (e.g., backup options)
 │
 ├── logs/
 │   └── deduper.log         # Activity log (created automatically)
 │
 ├── backups/
-│   └── (empty now)         # MBOX backups go here before modifying anything
+│   └── *.zip               # MBOX backups go here before modifying anything
 │
 ├── build/                  # Empty at first; PyInstaller can output here
 ├── models/
@@ -20,6 +20,9 @@ thunderbird_deduper/
 │   └── mailbox.py
 │
 ├── tests/
+│
+├── icons/
+│   └── thunderbird_deduper.ico
 
 
 🔍 What each file does

@@ -14,6 +14,7 @@ from PySide6.QtWidgets import (
 
 from PySide6.QtGui import QAction
 from PySide6.QtCore import Qt
+from PySide6.QtGui import QIcon
 
 from config import load_config, save_config
 from functions.scanner import find_mbox_files, parse_all_mailboxes
@@ -40,6 +41,7 @@ class MainWindow(QMainWindow):
         super().__init__()
 
         self.setWindowTitle("Thunderbird Duplicate Email Remover")
+        self.setWindowIcon(QIcon("icons/thunderbird_deduper.ico"))
         self.setMinimumSize(700, 600)
 
         self.progress_bar = QProgressBar()

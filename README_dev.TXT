@@ -5,12 +5,9 @@ Run app_gui.py to run the program
 Write pytest to run the tests
 
 TODO:
-    Add exclude trash choice to config
-    -II- compression level -II-
     More tests
     Hash all the message? Put option to choose that
-    Checkboxes for mail folders
-    Icon
+    Checkboxes for mail folders???
     Update the comments
 
 BUGS:
