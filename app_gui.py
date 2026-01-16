@@ -205,7 +205,6 @@ class MainWindow(QMainWindow):
         if is_thunderbird_running():
             msg_box.open()
 
-
         start_time = datetime.now()
 
         # Disable button & change text
@@ -237,9 +236,9 @@ class MainWindow(QMainWindow):
             backup_file = backup_folder(folder, self.config)
 
             if logging.getLogger().isEnabledFor(logging.DEBUG):
-                backup_finished_time = datetime.now() # ///////////////////////////
-                duration_mins_secs = calc_duration(start_time, backup_finished_time) # ///////////////////////////
-                logging.debug(f"Backup duration: {duration_mins_secs}") # ///////////////////////////
+                backup_finished_time = datetime.now()
+                duration_mins_secs = calc_duration(start_time, backup_finished_time) 
+                logging.debug(f"Backup duration: {duration_mins_secs}")
 
             file_size = os.path.getsize(backup_file)
             formatted_file_size = format_size(file_size)
