@@ -236,23 +236,20 @@ class MainWindow(QMainWindow):
 
 
             file_size = os.path.getsize(backup_file)
+            backup_file_absolute_path = os.path.abspath(backup_file)
             formatted_file_size = format_size(file_size)
 
-            self.output_box.append(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file}\n")
-            logging.info(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file}\n")
+            self.output_box.append(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file_absolute_path}\n")
+            logging.info(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file_absolute_path}\n")
                         
             if logging.getLogger().isEnabledFor(logging.DEBUG):
                 backup_finished_time = datetime.now()
                 duration_mins_secs = calc_duration(start_time, backup_finished_time) 
                 logging.debug(f"Backup duration: {duration_mins_secs}")
-                
+
             self.progress_bar.setValue(29)
-
             self.progress_label.setText("Scanning for duplicate mails...") 
-            # QApplication.processEvents()   # Force GUI refresh. Needed? /////////////////////////////////////////
-
             mboxes = find_mbox_files(folder, self.checkbox_trash.isChecked() )
-
             self.mbox_list.clear()
             self.mbox_list.addItems(mboxes)
 

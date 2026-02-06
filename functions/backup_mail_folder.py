@@ -4,12 +4,9 @@ import datetime
 import os
 import zipfile
 
-# from config import load_config # ///////////////////////////////////////////
-
 def backup_folder(source_folder, cfg):
     backup_dir = "mail_folder_backups"
     backup_file_name_start = "ThunderB_Mail_Folder_Backup"
-    # config = load_config() # ///////////////////////////////////////////////
     zip_compression_level = int( cfg["backup_zip_file_compr_level"] )
     os.makedirs(backup_dir, exist_ok = True) # Ensure backup directory exists
 
@@ -24,7 +21,6 @@ def backup_folder(source_folder, cfg):
         zip_path,
         mode="w",
         compression = zipfile.ZIP_DEFLATED,
-        # compresslevel = 9   # ← balance of speed & size (1-9. 9 is strongest compression but slowest) This should be dynamic in future.
         compresslevel = zip_compression_level
     ) as zipf:
         for root, _, files in os.walk(source_folder):
