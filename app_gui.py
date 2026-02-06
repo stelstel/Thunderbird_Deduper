@@ -3,7 +3,7 @@
 import sys
 import os
 import logging
-import time # Remove? //////////////////////////////
+# import time # Remove? //////////////////////////////
 
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QLabel, QLineEdit,
@@ -24,7 +24,7 @@ from functions.logging_setup import setup_logging
 from datetime import datetime
 from functions.functions import log_uncaught_exceptions, is_thunderbird_running, calc_duration, format_size
 
-DEBUG_MODE = False
+DEBUG_MODE = True
 
 setup_logging(debug=DEBUG_MODE)
 logging.info("-" * 80)
@@ -55,7 +55,6 @@ class MainWindow(QMainWindow):
         progress_layout = QHBoxLayout()
         progress_layout.addWidget(self.progress_label)
         progress_layout.addWidget(self.progress_bar)
-
 
         # Load config
         self.config = load_config()
@@ -235,10 +234,6 @@ class MainWindow(QMainWindow):
             # ------------- Backing up ------------------------
             backup_file = backup_folder(folder, self.config)
 
-            if logging.getLogger().isEnabledFor(logging.DEBUG):
-                backup_finished_time = datetime.now()
-                duration_mins_secs = calc_duration(start_time, backup_finished_time) 
-                logging.debug(f"Backup duration: {duration_mins_secs}")
 
             file_size = os.path.getsize(backup_file)
             formatted_file_size = format_size(file_size)
@@ -246,6 +241,11 @@ class MainWindow(QMainWindow):
             self.output_box.append(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file}\n")
             logging.info(f"✔ Backup created:\nSize: {formatted_file_size}, {backup_file}\n")
                         
+            if logging.getLogger().isEnabledFor(logging.DEBUG):
+                backup_finished_time = datetime.now()
+                duration_mins_secs = calc_duration(start_time, backup_finished_time) 
+                logging.debug(f"Backup duration: {duration_mins_secs}")
+                
             self.progress_bar.setValue(29)
 
             self.progress_label.setText("Scanning for duplicate mails...") 

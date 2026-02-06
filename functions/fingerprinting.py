@@ -1,37 +1,47 @@
 # functions/fingerprinting.py
 
-import mailbox
-
+import hashlib
 from functions.normalizing import normalize
 
 
-
 def get_one_msg_fingerprint_simple(message):
-    """
-    Generate a unique fingerprint for an email message.
-    Creates a concatenated string fingerprint from key message attributes
-    (message ID, subject, sender, and date) to identify and distinguish
-    individual messages.
-    Args:
-        message (dict): A dictionary containing email message headers with
-            at minimum the following optional keys:
-            - "message-id" (str): The unique message identifier
-            - "subject" (str): The email subject line
-            - "from" (str): The sender's email address
-            - "date" (str): The message date
-    Returns:
-        str: A pipe-delimited fingerprint string in the format:
-            "{message-id}|{subject}|{sender}|{date}"
-    Example:
-        >>> msg = {"message-id": "123", "subject": "Test", "from": "user@example.com", "date": "2024-01-01"}
-        >>> get_one_msg_fingerprint(msg)
-        '123|Test|user@example.com|2024-01-01'
-    """
     msg_id = message.get("message-id", "")
     subject = message.get("subject", "")
     sender = message.get("from", "")
-    date = message.get("date", "")
-    fingerprint = f"{msg_id}|{subject}|{sender}|{date}"
-    fingerprint = normalize(fingerprint)
 
-    return fingerprint
+    fingerprint = f"{msg_id}|{subject}|{sender}"
+    return normalize(fingerprint)
+
+
+def get_one_msg_fingerprint_with_body(message, body_chars=80):
+    """
+    Header-based fingerprint + small body snippet
+    (fixes the '1 remaining duplicate' issue)
+    """
+    header_fp = get_one_msg_fingerprint_simple(message)
+
+    body = ""
+
+    try:
+        if message.is_multipart():
+            for part in message.walk():
+                if part.get_content_type() == "text/plain":
+                    body = part.get_payload(decode=True).decode(errors="ignore")
+                    break
+        else:
+            body = message.get_payload(decode=True).decode(errors="ignore")
+    except Exception:
+        body = ""
+
+    body = normalize(body[:body_chars])
+
+    return f"{header_fp}|{body}"
+
+
+def get_one_msg_fingerprint_strict(message):
+    """
+    Byte-for-byte fingerprint.
+    Absolutely no duplicates can survive this.
+    """
+    raw = message.as_bytes().replace(b"\r\n", b"\n")
+    return hashlib.md5(raw).hexdigest()

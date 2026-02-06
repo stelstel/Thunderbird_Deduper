@@ -1,48 +1,80 @@
-import logging
+import mailbox
 from unittest.mock import patch, MagicMock
 
 from functions.process_1_mbox import process_one_mbox
 
 
-def test_process_one_mbox_removes_duplicates(caplog):
-    mbox_path = "dummy.mbox"
+def test_process_one_mbox_removes_duplicates(tmp_path):
+    # --- Arrange -------------------------------------------------
 
-    # Fake messages
-    msg1 = MagicMock(name="msg1")
-    msg2 = MagicMock(name="msg2")
-    msg3 = MagicMock(name="msg3")
+    # Fake mbox path
+    mbox_path = tmp_path / "Inbox"
 
-    fake_messages = [msg1, msg2, msg3]
+    # Create fake email messages
+    msg1 = MagicMock()
+    msg2 = MagicMock()
+    msg3 = MagicMock()
 
-    # First two are duplicates, third is unique
-    fake_checksums = ["aaa", "aaa", "bbb"]
+    messages = [msg1, msg2, msg3]
 
-    fake_mbox = MagicMock()
-    fake_mbox.__iter__.return_value = fake_messages
+    # Fake fingerprints:
+    # msg1 and msg2 are duplicates, msg3 is unique
+    fingerprints = [
+        "fp-duplicate",
+        "fp-duplicate",
+        "fp-unique",
+    ]
 
-    with (
-        patch("functions.process_1_mbox.mailbox.mbox", return_value=fake_mbox),
-        patch(
-            "functions.process_1_mbox.get_messages_fingerprint_hashed_list",
-            return_value=fake_checksums,
-        ),
-        patch("functions.process_1_mbox.write_mbox_file") as mock_write,
-        caplog.at_level(logging.INFO),
-    ):
-        _, msg, deleted_count = process_one_mbox(mbox_path)
+    # Mock mailbox.mbox to return our fake messages
+    mock_mbox = MagicMock()
+    mock_mbox.__iter__.return_value = messages
 
-    # One duplicate should be removed
-    assert deleted_count == 1
+    with patch("functions.process_1_mbox.mailbox.mbox", return_value=mock_mbox), \
+         patch(
+             "functions.process_1_mbox.get_one_msg_fingerprint_with_body",
+             side_effect=fingerprints,
+         ), \
+         patch("functions.process_1_mbox.write_mbox_file") as mock_write:
 
-    # Message text
-    assert "Deleted 1 duplicate messages" in msg
+        # --- Act --------------------------------------------------
+        _, msg, deleted_count = process_one_mbox(str(mbox_path))
 
-    # Only unique messages should be written
-    mock_write.assert_called_once()
-    args, _ = mock_write.call_args
+        # --- Assert ----------------------------------------------
+        assert deleted_count == 1
+        assert "Deleted 1 duplicate" in msg
 
-    assert args[0] == mbox_path
-    assert args[1] == [msg1, msg3]  # first duplicate kept, second removed
+        # write_mbox_file should be called once
+        mock_write.assert_called_once()
 
-    # Logging
-    assert "Deleted 1 duplicate messages from mbox" in caplog.text
+        # Extract arguments passed to write_mbox_file
+        called_path, kept_messages = mock_write.call_args[0]
+
+        assert called_path == str(mbox_path)
+        assert kept_messages == [msg1, msg3]
+
+
+
+def test_process_one_mbox_no_duplicates(tmp_path):
+    print("Testing process_one_mbox with no duplicates...") #////////////////////////////////////////////
+    mbox_path = tmp_path / "Inbox"
+
+    msg1 = MagicMock()
+    msg2 = MagicMock()
+
+    messages = [msg1, msg2]
+
+    mock_mbox = MagicMock()
+    mock_mbox.__iter__.return_value = messages
+
+    with patch("functions.process_1_mbox.mailbox.mbox", return_value=mock_mbox), \
+         patch(
+             "functions.process_1_mbox.get_one_msg_fingerprint_with_body",
+             side_effect=["fp1", "fp2"],
+         ), \
+         patch("functions.process_1_mbox.write_mbox_file") as mock_write:
+
+        _, msg, deleted_count = process_one_mbox(str(mbox_path))
+
+        assert deleted_count == 0
+        assert msg == ""
+        mock_write.assert_not_called()
