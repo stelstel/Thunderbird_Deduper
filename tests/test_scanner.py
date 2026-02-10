@@ -1,44 +1,58 @@
 import os
+from unittest.mock import patch, mock_open
 
-from functions.parser import get_messages_from_mbox
-
-
-def find_mbox_files(root_folder: str, exclude_trash_files: bool):
-    mbox_files = []
-
-    for dirpath, dirnames, filenames in os.walk(root_folder):
-        for filename in filenames:
-            if filename.endswith(".msf") or filename.startswith(".") or filename.lower() == "desktop.ini":
-                continue
-
-            if exclude_trash_files:
-                if "trash" in filename.lower() or "trash" in dirpath.lower():
-                    continue
-
-            full_path = os.path.join(dirpath, filename)
-
-            try:
-                with open(full_path, "r", encoding="utf-8", errors="ignore") as f:
-                    for _ in range(10):
-                        line = f.readline()
-                        if not line:
-                            break
-                        if line.startswith("From "):
-                            mbox_files.append(full_path)
-                            break
-            except Exception:
-                continue
-
-    return mbox_files
+from functions.scanner import find_mbox_files
 
 
-def parse_all_mailboxes(folder, exclude_trash_files=True):
-    mbox_files = find_mbox_files(folder, exclude_trash_files)
+def test_find_mbox_files_detects_valid_mbox():
+    fake_walk = [
+        ("root", [], ["Inbox", "notes.txt", "archive.msf"]),
+    ]
 
-    total_messages = 0
+    mbox_content = (
+        "From user@example.com Sat Jan 01 00:00:00 2022\n"
+        "Subject: Test\n"
+        "\n"
+        "Hello\n"
+    )
 
-    for mbox_file in mbox_files:
-        messages = get_messages_from_mbox(mbox_file)
-        total_messages += len(messages)
+    with patch("functions.scanner.os.walk", return_value=fake_walk), \
+         patch("builtins.open", mock_open(read_data=mbox_content)):
 
-    return total_messages
+        result = find_mbox_files("root", exclude_trash_files=False)
+
+    assert os.path.join("root", "Inbox") in result
+    assert os.path.join("root", "notes.txt") in result
+    assert len(result) == 2
+    
+
+
+def test_find_mbox_files_ignores_files_without_from_line():
+    fake_walk = [
+        ("root", [], ["file1", "file2"]),
+    ]
+
+    non_mbox_content = "Just some text\nAnother line\n"
+
+    with patch("functions.scanner.os.walk", return_value=fake_walk), \
+         patch("builtins.open", mock_open(read_data=non_mbox_content)):
+
+        result = find_mbox_files("root", exclude_trash_files=False)
+
+    assert result == []
+
+
+def test_find_mbox_files_excludes_trash_when_enabled():
+    fake_walk = [
+        ("root", [], ["Inbox", "Trash"]),
+    ]
+
+    mbox_content = "From someone@example.com\nBody\n"
+
+    with patch("functions.scanner.os.walk", return_value=fake_walk), \
+         patch("builtins.open", mock_open(read_data=mbox_content)):
+
+        result = find_mbox_files("root", exclude_trash_files=True)
+
+    assert os.path.join("root", "Inbox") in result
+    assert os.path.join("root", "Trash") not in result
