@@ -1,8 +1,11 @@
+# conftest.py
+
 """
-Configuration module for pytest that sets up the Python path for the Thunderbird_Deduper project.
-This module initializes the test environment by adding the project root directory to the Python
-path, allowing tests to import modules from the project without requiring installation.
-The ROOT_DIR is determined by resolving the absolute path of the current file's parent directory.
+Configuration file for pytest that sets up the Python path for the Thunderbird Deduper project.
+This module ensures that the root directory of the project is added to the Python path,
+allowing imports from the project root to work correctly during testing.
+Module-level variables:
+    ROOT_DIR (Path): Absolute path to the directory containing this conftest.py file.
 """
 
 import sys

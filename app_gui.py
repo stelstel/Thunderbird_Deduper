@@ -3,7 +3,6 @@
 import sys
 import os
 import logging
-# import time # Remove? //////////////////////////////
 
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QLabel, QLineEdit,
@@ -38,6 +37,22 @@ sys.excepthook = log_uncaught_exceptions
 
 class MainWindow(QMainWindow):
     def __init__(self):
+        """
+        Initialize the Thunderbird Duplicate Email Remover GUI application.
+        Sets up the main window with:
+        - Window properties (title, icon, minimum size)
+        - Progress bar and status label
+        - Configuration loading from config file
+        - Menu bar with File (Exit) and Help (About, View Log) menus
+        - Main widgets including:
+            - Folder selection input with browse button
+            - Checkbox to exclude trash folders
+            - Start scan button
+            - Mailbox files list display
+            - Status output text area
+            - Exit button
+        - Layout organization using QVBoxLayout and QHBoxLayout
+        """
         super().__init__()
 
         self.setWindowTitle("Thunderbird Duplicate Email Remover")
@@ -185,6 +200,24 @@ class MainWindow(QMainWindow):
     # Scan Button Logic
     # -------------------------------------------------
     def start_scan(self):
+        """
+        Initiates a scan of Thunderbird mailboxes to find and remove duplicate messages.
+        This method performs the following operations:
+        1. Checks if Thunderbird is currently running and prompts user to close it if necessary
+        2. Disables UI controls and updates scan button to show "Processing..." state
+        3. Validates the selected folder path
+        4. Creates a backup of the mailbox folder
+        5. Scans for mbox files and identifies duplicate messages
+        6. Processes mboxes to remove duplicates
+        7. Displays results and statistics
+        8. Re-enables UI controls upon completion or error
+        The method handles user configuration persistence, progress bar updates,
+        logging at various stages, and displays appropriate messages to the user
+        via the output box and message dialogs.
+        Raises:
+            Implicitly handles exceptions through try/finally block to ensure
+            UI controls are restored regardless of success or failure.
+        """
 
         # -------------------------------------------------
         # THUNDERBIRD RUNNING CHECK
