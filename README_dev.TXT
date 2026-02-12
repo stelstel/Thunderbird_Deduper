@@ -8,8 +8,8 @@ BUGS:
         
 
 TODO:
-    More tests
     Make it quicker
+    Svarar inte fix
     Update the comments
 
 

@@ -4,12 +4,29 @@ import os
 import mailbox
 import logging
 import tempfile
-# import time
 import shutil
 
 
 
 def write_mbox_file(mbox_path, messages):
+    """
+    Write messages to an MBOX file safely using atomic operations.
+    This function creates a temporary file in the same directory as the target MBOX file,
+    writes all messages to it, and then atomically replaces the original file. This approach
+    ensures data integrity and prevents corruption if the operation is interrupted.
+    Args:
+        mbox_path (str): The full file path where the MBOX file should be written.
+        messages (list): A list of email message objects to be written to the MBOX file.
+    Raises:
+        Exception: Re-raises any exception that occurs during the MBOX creation, writing,
+                   or file replacement process after cleanup of temporary files.
+    Note:
+        - The function uses a temporary file that is atomically moved to the target location
+        - The MBOX file is locked during writing to prevent concurrent access
+        - Temporary files are cleaned up if an error occurs
+        - Windows-safe atomic file replacement using shutil.move()
+    """
+
     directory = os.path.dirname(mbox_path)
     filename = os.path.basename(mbox_path)
     

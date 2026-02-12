@@ -9,11 +9,23 @@ from functions.replace_mbox_file import write_mbox_file
 
 def process_one_mbox(mbox_path):
     """
-    Removes duplicate messages from a single mbox file.
-    Duplicates are detected using a fingerprint consisting of
-    headers + a small body snippet.
+    Process an mbox file to identify and remove duplicate messages.
+    Reads all messages from the specified mbox file, compares them using a strict
+    fingerprinting method to detect duplicates, and removes any duplicate entries.
+    The mbox file is only rewritten if duplicates were found and removed.
+    Args:
+        mbox_path (str): Path to the mbox file to process.
+    Returns:
+        tuple: A tuple containing:
+            - None: Reserved for potential future use.
+            - str: A message describing the action taken. Empty string if no 
+              duplicates were found, otherwise a message indicating the number 
+              of duplicates deleted.
+            - int: The count of duplicate messages that were deleted.
+    Side Effects:
+        - Logs an info-level message if duplicates were deleted.
+        - Overwrites the mbox file if duplicates were removed.
     """
-
     logger = logging.getLogger(__name__)
 
     # --- Read all messages first (important!)

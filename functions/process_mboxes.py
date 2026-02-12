@@ -7,15 +7,20 @@ from PySide6.QtWidgets import QApplication
 
 def process_mboxes(mboxes, progress_bar):
     """
-    Process a list of mailbox objects by applying transformations to each.
+    Process multiple mailboxes to remove duplicate messages.
     Args:
-        mboxes (list): A list of mailbox objects to be processed.
+        mboxes (list): A list of mailbox objects to be processed for duplicate removal.
+        progress_bar (QProgressBar): A GUI progress bar widget to display processing progress.
     Returns:
         tuple: A tuple containing:
-            - mboxes (list): The list of processed mailbox objects.
-            - msg_out (str): A concatenated string of messages from processing each mailbox.
+            - mboxes (list): The updated list of mailbox objects after duplicate removal.
+            - msg_out (str): Concatenated messages/output from processing each mailbox.
+            - total_messages_deleted (int): The total count of duplicate messages deleted across all mailboxes.
+    Notes:
+        - Progress is incremented equally across all mailboxes.
+        - GUI events are processed after each mailbox to ensure responsive UI updates.
+        - Results are logged to the logging system.
     """
-
     i = 0
     msg_out = ""
     total_messages_deleted = 0

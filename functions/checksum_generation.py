@@ -8,13 +8,18 @@ from functions.fingerprinting import get_one_msg_fingerprint_simple
 def get_one_msg_fingerprint_hashed(message):
     """
     Generate an MD5 hash fingerprint for a single email message.
-    This function takes a message object, extracts a simple fingerprint representation
-    of it, and returns the hexadecimal digest of its MD5 hash.
+    This function creates a simple fingerprint of a message and then
+    converts it to an MD5 hash digest for comparison and deduplication purposes.
     Args:
-        message: An email message object to be hashed.
+        message: The message object to generate a fingerprint hash for.
     Returns:
         str: The hexadecimal representation of the MD5 hash of the message fingerprint.
+    Example:
+        >>> hash = get_one_msg_fingerprint_hashed(email_message)
+        >>> print(hash)
+        '5d41402abc4b2a76b9719d911017c592'
     """
+   
     msg = get_one_msg_fingerprint_simple(message)
 
     hash_object = hashlib.md5(msg.encode())
@@ -26,17 +31,16 @@ def get_one_msg_fingerprint_hashed(message):
 
 def get_messages_fingerprint_hashed_list(mbox_path):
     """
-    Generate a list of hashed fingerprints for all messages in a mailbox file.
-    This function opens an mbox file, iterates through all messages, and computes
-    a hashed fingerprint for each message to be used for deduplication purposes.
+    Generate a list of hashed fingerprints for all messages in an mbox file.
     Args:
-        mbox_path (str): The file path to the mbox mailbox file.
+        mbox_path (str): The file path to the mbox file to process.
     Returns:
-        list: A list of hashed fingerprints, one for each message in the mailbox.
-    Example:
-        >>> fingerprints = get_messages_fingerprint_hashed_list("/path/to/mailbox.mbox")
-        >>> print(len(fingerprints))
+        list: A list of hashed fingerprints, one for each message in the mbox file.
+    Raises:
+        FileNotFoundError: If the mbox file does not exist at the specified path.
+        mailbox.Error: If the mbox file is corrupted or cannot be read.
     """
+    
     
     mbox = mailbox.mbox(mbox_path)
     msgs_hashed_list = []
@@ -50,15 +54,11 @@ def get_messages_fingerprint_hashed_list(mbox_path):
 
 def get_messages_fingerprint_hashed_str(mbox_path):
     """
-    Generate a newline-separated string of hashed message fingerprints from an mbox file.
-    This function retrieves a list of hashed message fingerprints from the specified mbox file
-    and concatenates them into a single string with each fingerprint on a new line.
+    Generate a concatenated string of hashed message fingerprints from an mbox file.
     Args:
         mbox_path (str): The file path to the mbox file to process.
     Returns:
-        str: A string containing hashed message fingerprints, with each fingerprint
-             separated by a newline character. Returns an empty string if no messages
-             are found.
+        str: A newline-separated string of hashed message fingerprints from the mbox file.
     """
     msgs_hashed_str = ""
     msg_list = get_messages_fingerprint_hashed_list(mbox_path)
